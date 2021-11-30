@@ -10,7 +10,11 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then((module) => module.HomeModule) // ativando o lazy load
+    loadChildren: () => import('./home/home.module').then((module) => module.HomeModule) // ativando o lazy load, e importando o HomeModule sobre demanda (sendo assim podemos remover de app.module.ts)
+  },
+  {
+    path: 'animais',
+    loadChildren: () => import('./animais/animais.module').then((module) => module.AnimaisModule)
   }
 ];
 

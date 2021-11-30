@@ -1,13 +1,41 @@
 <h4 class="text-center">Login</h4>
 
-<form class="form mt-4">
-    <div class="form-group">
-        <input type="text" class="form-control" placeholder="Nome do usuário" />
-    </div>
+<!--#loginForm="ngForm" permite criar uma variável que contera o estado do formulário inteiro-->
+<form class="form mt-4" (ngSubmit)="login()" #loginForm="ngForm">
+  <div class="form-group">
+    <!--#campoUsuario="ngModel" cria uma variável que irá conter o valor de ngModel-->
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Nome do usuário"
+      [(ngModel)]="usuario"
+      name="usuario"
+      #campoUsuario="ngModel"
+      required
+    />
+    <!--touched indica se o usuário passou pelo campo-->
+    <app-mensagem
+      *ngIf="campoUsuario.invalid && campoUsuario.touched"
+      mensagem="Usuário obrigatório"
+    ></app-mensagem>
+  </div>
 
-    <div class="form-group">
-        <input type="password" class="form-control" placeholder="Senha" />
-    </div>
+  <div class="form-group">
+    <input
+      type="password"
+      class="form-control"
+      placeholder="Senha"
+      [(ngModel)]="senha"
+      name="senha"
+      #campoSenha="ngModel"
+      required
+    />
+    <app-mensagem
+      *ngIf="campoSenha.invalid && campoSenha.touched"
+      mensagem="Senha obrigatória"
+    ></app-mensagem>
+  </div>
 
-    <button type="submit" class="btn btn-primary btn-block">Login</button>
+  <!--[disabled] permite controlar o estado disabled-->
+  <button [disabled]="loginForm.invalid" type="submit" class="btn btn-primary btn-block">Login</button>
 </form>
